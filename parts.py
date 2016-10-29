@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, requests, re
+import sys, re, urllib2
 from bs4 import BeautifulSoup
 
 units = [
@@ -169,8 +169,8 @@ def capacitor(args):
 def part_search(args):
     name = args[0]
     endpoint = 'http://www.alldatasheet.com/view.jsp?Searchword=%s'
-    html = requests.get(endpoint % name).text
-    
+    html = urllib2.urlopen(endpoint % name).read()
+
     parsed = BeautifulSoup(html, "lxml")
     
     tags = parsed.find_all('tr', limit=4, id=re.compile("cell[0-9]{1,2}"))
