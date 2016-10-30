@@ -171,7 +171,7 @@ def part_search(args):
     endpoint = 'http://www.alldatasheet.com/view.jsp?Searchword=%s'
     html = urllib2.urlopen(endpoint % name).read()
 
-    parsed = BeautifulSoup(html, "lxml")
+    parsed = BeautifulSoup(html, "html.parser")
     
     tags = parsed.find_all('tr', limit=4, id=re.compile("cell[0-9]{1,2}"))
     tds = tags[0].find_all('td')
